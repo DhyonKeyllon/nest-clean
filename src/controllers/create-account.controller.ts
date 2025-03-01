@@ -7,7 +7,7 @@ import {
   Post,
   UsePipes,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
 import { createZodDto, ZodValidationPipe } from '@anatine/zod-nestjs';
 import { hash } from 'bcryptjs';
@@ -33,6 +33,7 @@ class CreateAccountResponseSchema extends createZodDto(
 @ApiTags('accounts')
 @Controller('/accounts')
 @UsePipes(new ZodValidationPipe())
+@ApiBearerAuth()
 export class CreateAccountController {
   constructor(private prismaService: PrismaService) {}
 
