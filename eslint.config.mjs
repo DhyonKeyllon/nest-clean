@@ -1,11 +1,12 @@
+import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
 import typescriptEslintEslintPlugin from '@typescript-eslint/eslint-plugin';
-import importHelpers from 'eslint-plugin-import-helpers';
-import globals from 'globals';
 import tsParser from '@typescript-eslint/parser';
+import importHelpers from 'eslint-plugin-import-helpers';
+import vitestGlobals from 'eslint-plugin-vitest-globals';
+import globals from 'globals';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,6 +28,7 @@ export default [
     plugins: {
       '@typescript-eslint': typescriptEslintEslintPlugin,
       'import-helpers': importHelpers,
+      'vitest-globals': vitestGlobals,
     },
 
     languageOptions: {
@@ -43,6 +45,7 @@ export default [
         project: 'tsconfig.json',
         tsconfigRootDir: '/root/projects/rocketseat/nest-clean',
       },
+      globals: vitestGlobals.environments.env.globals, // Define as globais do Vitest
     },
 
     rules: {
