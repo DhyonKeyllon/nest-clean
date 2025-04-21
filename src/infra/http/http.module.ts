@@ -4,6 +4,7 @@ import { AnswerQuestionUseCase } from '@/domain/forum/application/use-cases/answ
 import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student';
 import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question';
 import { CreateStudentUseCase } from '@/domain/forum/application/use-cases/create-student';
+import { DeleteAnswerUseCase } from '@/domain/forum/application/use-cases/delete-answer';
 import { DeleteQuestionUseCase } from '@/domain/forum/application/use-cases/delete-question';
 import { EditAnswerUseCase } from '@/domain/forum/application/use-cases/edit-answer';
 import { EditQuestionUseCase } from '@/domain/forum/application/use-cases/edit-question';
@@ -16,6 +17,7 @@ import { AnswerQuestionController } from './controllers/answer-question.controll
 import { AuthenticateAccountController } from './controllers/authenticate.controller';
 import { CreateAccountController } from './controllers/create-account.controller';
 import { CreateQuestionController } from './controllers/create-question.controller';
+import { DeleteAnswerController } from './controllers/delete-answer.controller';
 import { DeleteQuestionController } from './controllers/delete-question.controller';
 import { EditAnswerController } from './controllers/edit-answer.controller';
 import { EditQuestionController } from './controllers/edit-question.controller';
@@ -34,6 +36,7 @@ import { ListRecentQuestionsController } from './controllers/list-recent-questio
     DeleteQuestionController,
     AnswerQuestionController,
     EditAnswerController,
+    DeleteAnswerController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -45,6 +48,7 @@ import { ListRecentQuestionsController } from './controllers/list-recent-questio
     DeleteQuestionUseCase,
     AnswerQuestionUseCase,
     EditAnswerUseCase,
+    DeleteAnswerUseCase,
   ],
   exports: [],
 })
