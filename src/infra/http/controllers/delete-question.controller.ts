@@ -9,8 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 
-import { createZodDto, ZodValidationPipe } from '@anatine/zod-nestjs';
-import { z } from 'zod';
+import { ZodValidationPipe } from '@anatine/zod-nestjs';
 
 import { DeleteQuestionUseCase } from '@/domain/forum/application/use-cases/delete-question';
 import { CurrentUser } from '@/infra/auth/current-user.decorator';
