@@ -1,11 +1,10 @@
 import {
   BadRequestException,
-  Body,
   Controller,
+  Delete,
   HttpCode,
   HttpStatus,
   Param,
-  Put,
   UsePipes,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
@@ -13,46 +12,31 @@ import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { createZodDto, ZodValidationPipe } from '@anatine/zod-nestjs';
 import { z } from 'zod';
 
-import { EditQuestionUseCase } from '@/domain/forum/application/use-cases/edit-question';
+import { DeleteQuestionUseCase } from '@/domain/forum/application/use-cases/delete-question';
 import { CurrentUser } from '@/infra/auth/current-user.decorator';
 import { UserPayload } from '@/infra/auth/jwt.strategy';
-
-class EditQuestionBodySchema extends createZodDto(
-  z.object({
-    title: z.string(),
-    content: z.string(),
-  }),
-) {}
-
-class EditQuestionResponseSchema extends createZodDto(z.object({})) {}
 
 @ApiTags('questions')
 @Controller('/questions/:id')
 @UsePipes(new ZodValidationPipe())
 @ApiBearerAuth()
-export class EditQuestionController {
-  constructor(private editQuestionUseCase: EditQuestionUseCase) {}
+export class DeleteQuestionController {
+  constructor(private deleteQuestionUseCase: DeleteQuestionUseCase) {}
 
-  @Put()
-  @HttpCode(HttpStatus.OK)
+  @Delete()
+  @HttpCode(HttpStatus.NO_CONTENT)
   @ApiCreatedResponse({
-    description: 'The record has been successfully updated.',
-    type: EditQuestionResponseSchema,
+    description: 'The record has been successfully deleted.',
   })
   async handle(
-    @Body() body: EditQuestionBodySchema,
     @CurrentUser() user: UserPayload,
     @Param('id') questionId: string,
   ) {
-    const { title, content } = body;
     const authorId = user.sub;
 
-    const result = await this.editQuestionUseCase.execute({
-      title,
-      content,
-      authorId,
-      attachmentsIds: [],
+    const result = await this.deleteQuestionUseCase.execute({
       questionId,
+      authorId,
     });
 
     if (result.isLeft()) {
