@@ -51,7 +51,7 @@ describe('Edit answer (E2E)', async () => {
       content: 'New answer',
     };
 
-    const answer = await answerFactory.makePrismaQuestion({
+    const answer = await answerFactory.makePrismaAnswer({
       authorId: user.id,
       questionId: question.id,
     });

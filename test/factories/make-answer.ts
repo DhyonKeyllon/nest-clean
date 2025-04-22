@@ -28,7 +28,7 @@ export function makeAnswer(
 export class AnswerFactory {
   constructor(private prismaService: PrismaService) {}
 
-  async makePrismaQuestion(data: Partial<AnswerProps> = {}): Promise<Answer> {
+  async makePrismaAnswer(data: Partial<AnswerProps> = {}): Promise<Answer> {
     const answer = makeAnswer(data);
 
     await this.prismaService.answer.create({
