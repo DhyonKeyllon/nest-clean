@@ -39,6 +39,7 @@ import { ListAnswerCommentsController } from './controllers/list-answer-comments
 import { ListQuestionAnswersController } from './controllers/list-question-answers.controller';
 import { ListQuestionCommentsController } from './controllers/list-question-comments.controller';
 import { ListRecentQuestionsController } from './controllers/list-recent-questions.controller';
+import { UploadAttachmentController } from './controllers/upload-attachment.controller';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -61,6 +62,7 @@ import { ListRecentQuestionsController } from './controllers/list-recent-questio
     DeleteAnswerCommentController,
     ListQuestionCommentsController,
     ListAnswerCommentsController,
+    UploadAttachmentController,
   ],
   providers: [
     CreateQuestionUseCase,

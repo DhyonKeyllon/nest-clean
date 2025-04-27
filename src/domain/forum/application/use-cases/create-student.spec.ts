@@ -1,5 +1,5 @@
 import { FakeHasher } from 'test/cryptography/fake-hasher';
-import { InMemoryStudentsRepository } from 'test/repositories/in-memory-create-student-repository';
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository';
 
 import { CreateStudentUseCase } from './create-student';
 
