@@ -18,9 +18,11 @@ import { ListAnswerCommentsUseCase } from '@/domain/forum/application/use-cases/
 import { ListQuestionAnswersUseCase } from '@/domain/forum/application/use-cases/list-question-answers';
 import { ListQuestionCommentsUseCase } from '@/domain/forum/application/use-cases/list-question-comments';
 import { ListRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/list-recent-questions';
+import { UploadAndCreateAttachmentUseCase } from '@/domain/forum/application/use-cases/upload-and-create-attachment';
 
 import { CryptographyModule } from '../cryptography/cryptography.module';
 import { DatabaseModule } from '../database/database.module';
+import { StorageModule } from '../storage/storage.module';
 import { AnswerQuestionController } from './controllers/answer-question.controller';
 import { AuthenticateAccountController } from './controllers/authenticate.controller';
 import { ChooseQuestionBestAnswerController } from './controllers/choose-question-best-answer.controller';
@@ -42,7 +44,7 @@ import { ListRecentQuestionsController } from './controllers/list-recent-questio
 import { UploadAttachmentController } from './controllers/upload-attachment.controller';
 
 @Module({
-  imports: [DatabaseModule, CryptographyModule],
+  imports: [DatabaseModule, CryptographyModule, StorageModule],
   controllers: [
     CreateAccountController,
     AuthenticateAccountController,
@@ -83,6 +85,7 @@ import { UploadAttachmentController } from './controllers/upload-attachment.cont
     DeleteAnswerCommentUseCase,
     ListQuestionCommentsUseCase,
     ListAnswerCommentsUseCase,
+    UploadAndCreateAttachmentUseCase,
   ],
   exports: [],
 })
