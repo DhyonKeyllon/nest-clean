@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { PaginationParams } from '@/core/repositories/pagination-params';
+import { QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments-repository';
 import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository';
 import { Question } from '@/domain/forum/enterprise/entities/question';
 
@@ -9,7 +10,10 @@ import { PrismaService } from '../prisma.service';
 
 @Injectable()
 export class PrismaQuestionsRepository implements QuestionsRepository {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly questionAttachmentsRepository: QuestionAttachmentsRepository,
+  ) {}
 
   async findById(id: string): Promise<Question | null> {
     const question = await this.prismaService.question.findUnique({
