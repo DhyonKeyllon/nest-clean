@@ -20,6 +20,7 @@ class CreateQuestionBodySchema extends createZodDto(
   z.object({
     title: z.string(),
     content: z.string(),
+    attachments: z.array(z.string().uuid()),
   }),
 ) {}
 
@@ -42,14 +43,14 @@ export class CreateQuestionController {
     @Body() body: CreateQuestionBodySchema,
     @CurrentUser() user: UserPayload,
   ) {
-    const { title, content } = body;
+    const { title, content, attachments } = body;
     const authorId = user.sub;
 
     const result = await this.createQuestionUseCase.execute({
       title,
       content,
       authorId,
-      attachmentsIds: [],
+      attachmentsIds: attachments,
     });
 
     if (result.isLeft()) {

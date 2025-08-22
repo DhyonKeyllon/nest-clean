@@ -1,7 +1,10 @@
-import { Attachment as PrismaQuestionAttachment } from '@prisma/client';
+import { Prisma, Attachment as PrismaQuestionAttachment } from '@prisma/client';
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
-import { QuestionAttachment as DomainQuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment';
+import {
+  QuestionAttachment as DomainQuestionAttachment,
+  QuestionAttachment,
+} from '@/domain/forum/enterprise/entities/question-attachment';
 
 export class PrismaQuestionAttachmentMapper {
   static toDomain(raw: PrismaQuestionAttachment): DomainQuestionAttachment {
@@ -14,5 +17,24 @@ export class PrismaQuestionAttachmentMapper {
       },
       new UniqueEntityID(raw.id),
     );
+  }
+
+  static toPrismaUpdateMany(
+    attachments: QuestionAttachment[],
+  ): Prisma.AttachmentUpdateManyArgs {
+    const attachmentIds = attachments.map((attachment) =>
+      attachment.attachmentId.toString(),
+    );
+
+    return {
+      where: {
+        id: {
+          in: attachmentIds,
+        },
+      },
+      data: {
+        questionId: attachments[0].questionId.toString(),
+      },
+    };
   }
 }
