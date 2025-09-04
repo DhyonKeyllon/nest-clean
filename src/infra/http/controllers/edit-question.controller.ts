@@ -21,6 +21,7 @@ class EditQuestionBodySchema extends createZodDto(
   z.object({
     title: z.string(),
     content: z.string(),
+    attachments: z.array(z.string().uuid()),
   }),
 ) {}
 
@@ -44,14 +45,14 @@ export class EditQuestionController {
     @CurrentUser() user: UserPayload,
     @Param('id') questionId: string,
   ) {
-    const { title, content } = body;
+    const { title, content, attachments } = body;
     const authorId = user.sub;
 
     const result = await this.editQuestionUseCase.execute({
       title,
       content,
       authorId,
-      attachmentsIds: [],
+      attachmentsIds: attachments,
       questionId,
     });
 
