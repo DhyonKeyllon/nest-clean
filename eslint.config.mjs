@@ -42,8 +42,7 @@ export default [
       sourceType: 'module',
 
       parserOptions: {
-        project: 'tsconfig.json',
-        tsconfigRootDir: '/root/projects/rocketseat/nest-clean',
+        project: './tsconfig.json',
       },
       globals: vitestGlobals.environments.env.globals, // Define as globais do Vitest
     },
