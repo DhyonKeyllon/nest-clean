@@ -20,9 +20,9 @@ export class PrismaQuestionAttachmentMapper {
   }
 
   static toPrismaUpdateMany(
-    attachments: QuestionAttachment[],
+    questionAttachments: QuestionAttachment[],
   ): Prisma.AttachmentUpdateManyArgs {
-    const attachmentIds = attachments.map((attachment) =>
+    const attachmentIds = questionAttachments.map((attachment) =>
       attachment.attachmentId.toString(),
     );
 
@@ -33,7 +33,7 @@ export class PrismaQuestionAttachmentMapper {
         },
       },
       data: {
-        questionId: attachments[0].questionId.toString(),
+        questionId: questionAttachments[0].questionId.toString(),
       },
     };
   }

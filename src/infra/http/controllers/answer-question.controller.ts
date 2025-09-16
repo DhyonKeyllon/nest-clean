@@ -20,6 +20,7 @@ import { UserPayload } from '@/infra/auth/jwt.strategy';
 class AnswerQuestionBodySchema extends createZodDto(
   z.object({
     content: z.string(),
+    attachments: z.array(z.string().uuid()),
   }),
 ) {}
 
@@ -43,14 +44,14 @@ export class AnswerQuestionController {
     @CurrentUser() user: UserPayload,
     @Param('questionId') questionId: string,
   ) {
-    const { content } = body;
+    const { content, attachments } = body;
     const authorId = user.sub;
 
     const result = await this.answerQuestionUseCase.execute({
       content,
       questionId,
       authorId,
-      attachmentsIds: [],
+      attachmentsIds: attachments,
     });
 
     if (result.isLeft()) {

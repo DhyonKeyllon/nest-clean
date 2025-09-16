@@ -20,6 +20,7 @@ import { UserPayload } from '@/infra/auth/jwt.strategy';
 class EditAnswerBodySchema extends createZodDto(
   z.object({
     content: z.string(),
+    attachments: z.array(z.string().uuid()).default([]),
   }),
 ) {}
 
@@ -43,13 +44,13 @@ export class EditAnswerController {
     @CurrentUser() user: UserPayload,
     @Param('id') answerId: string,
   ) {
-    const { content } = body;
+    const { content, attachments } = body;
     const authorId = user.sub;
 
     const result = await this.editAnswerUseCase.execute({
       content,
       authorId,
-      attachmentsIds: [],
+      attachmentsIds: attachments,
       answerId,
     });
 
